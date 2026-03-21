@@ -115,3 +115,4 @@ C:\Users\Ninja Turtle\Desktop\MidtermProject\fake\LOSIENTO_AMS_DBTC\AMS_DBTC_API
 C:\Users\Ninja Turtle\Desktop\MidtermProject\fake\LOSIENTO_AMS_DBTC\AMS_DBTC_API\MidtermTeno\bin\Debug\net8.0\AMS_DBTC_API.xml
 C:\Users\Ninja Turtle\Desktop\MidtermProject\fake\LOSIENTO_AMS_DBTC\AMS_DBTC_API\MidtermTeno\obj\Debug\net8.0\AMS_DBTC_API.xml
 C:\Users\Ninja Turtle\Desktop\MidtermProject\fake\LOSIENTO_AMS_DBTC\AMS_DBTC_API\MidtermTeno\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\Ninja Turtle\Desktop\MidtermProject\fake\LOSIENTO_AMS_DBTC\AMS_DBTC_API\MidtermTeno\obj\Debug\net8.0\AMS_DBTC_API.sourcelink.json
