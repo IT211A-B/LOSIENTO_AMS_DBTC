@@ -1,0 +1,353 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AMS_DBTC_API</name>
+    </assembly>
+    <members>
+        <member name="T:MidtermTeno.AttendanceManagementSysttem.DTOs.AttendanceRecordDTO">
+            <summary>
+            Data transfer object for attendance record API requests and responses.
+            </summary>
+        </member>
+        <member name="T:MidtermTeno.AttendanceManagementSysttem.DTOs.CourseDTO">
+            <summary>
+            Data transfer object for course API requests and responses.
+            </summary>
+        </member>
+        <member name="T:MidtermTeno.AttendanceManagementSysttem.DTOs.MarkAttendanceDTO">
+            <summary>
+            Payload used by the mark-attendance endpoint.
+            </summary>
+        </member>
+        <member name="T:MidtermTeno.AttendanceManagementSysttem.DTOs.PagedResultDTO`1">
+            <summary>
+            Generic paginated API response wrapper.
+            </summary>
+            <typeparam name="T">The item type returned in the page.</typeparam>
+        </member>
+        <member name="T:MidtermTeno.AttendanceManagementSysttem.DTOs.StudentDTO">
+            <summary>
+            Data transfer object for student API requests and responses.
+            </summary>
+        </member>
+        <member name="T:MidtermTeno.AttendanceManagementSysttem.DTOs.TeacherDTO">
+            <summary>
+            Data transfer object for teacher API requests and responses.
+            </summary>
+        </member>
+        <member name="T:MidtermTeno.AttendanceManagementSysttem.Repository.AttendanceRecordRepository">
+            <summary>
+            EF Core data access implementation for attendance records.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.AttendanceRecordRepository.GetAllAsync">
+            <summary>
+            Returns all attendance records ordered by latest date first.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.AttendanceRecordRepository.GetByIdAsync(System.Int32)">
+            <summary>
+            Returns one attendance record by ID, or null if not found.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.AttendanceRecordRepository.GetByStudentCourseDateAsync(System.Int32,System.Int32,System.DateTime)">
+            <summary>
+            Returns one attendance record by student, course, and date.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.AttendanceRecordRepository.AddAsync(MidtermTeno.AttendanceManagementSysttem.Model.AttendanceRecord)">
+            <summary>
+            Creates a new attendance record row.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.AttendanceRecordRepository.UpdateAsync(MidtermTeno.AttendanceManagementSysttem.Model.AttendanceRecord)">
+            <summary>
+            Updates an existing attendance record row.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.AttendanceRecordRepository.DeleteAsync(System.Int32)">
+            <summary>
+            Deletes one attendance record row by ID.
+            </summary>
+        </member>
+        <member name="T:MidtermTeno.AttendanceManagementSysttem.Repository.CourseRepository">
+            <summary>
+            EF Core data access implementation for courses.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.CourseRepository.GetAllAsync">
+            <summary>
+            Returns all courses.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.CourseRepository.GetByIdAsync(System.Int32)">
+            <summary>
+            Returns one course by ID, or null if not found.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.CourseRepository.AddAsync(MidtermTeno.AttendanceManagementSysttem.Model.Course)">
+            <summary>
+            Creates a new course row.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.CourseRepository.UpdateAsync(MidtermTeno.AttendanceManagementSysttem.Model.Course)">
+            <summary>
+            Updates an existing course row.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.CourseRepository.DeleteAsync(System.Int32)">
+            <summary>
+            Deletes one course row by ID.
+            </summary>
+        </member>
+        <member name="T:MidtermTeno.AttendanceManagementSysttem.Repository.StudentRepository">
+            <summary>
+            EF Core data access implementation for students.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.StudentRepository.GetAllAsync">
+            <summary>
+            Returns all students.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.StudentRepository.GetByIdAsync(System.Int32)">
+            <summary>
+            Returns one student by ID, or null if not found.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.StudentRepository.AddAsync(MidtermTeno.AttendanceManagementSysttem.Model.Student)">
+            <summary>
+            Creates a new student row.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.StudentRepository.UpdateAsync(MidtermTeno.AttendanceManagementSysttem.Model.Student)">
+            <summary>
+            Updates an existing student row.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.StudentRepository.DeleteAsync(System.Int32)">
+            <summary>
+            Deletes one student row by ID.
+            </summary>
+        </member>
+        <member name="T:MidtermTeno.AttendanceManagementSysttem.Repository.TeacherRepository">
+            <summary>
+            EF Core data access implementation for teachers.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.TeacherRepository.GetAllAsync">
+            <summary>
+            Returns all teachers.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.TeacherRepository.GetByIdAsync(System.Int32)">
+            <summary>
+            Returns one teacher by ID, or null if not found.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.TeacherRepository.AddAsync(MidtermTeno.AttendanceManagementSysttem.Model.Teacher)">
+            <summary>
+            Creates a new teacher row.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.TeacherRepository.UpdateAsync(MidtermTeno.AttendanceManagementSysttem.Model.Teacher)">
+            <summary>
+            Updates an existing teacher row.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.TeacherRepository.DeleteAsync(System.Int32)">
+            <summary>
+            Deletes one teacher row by ID.
+            </summary>
+        </member>
+        <member name="T:MidtermTeno.Controllers.AttendanceController">
+            <summary>
+            Handles attendance-related endpoints.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.Controllers.AttendanceController.GetAll(System.Int32,System.Int32)">
+            <summary>
+            Gets attendance records using pagination.
+            </summary>
+            <param name="pageNumber">Page index starting at 1.</param>
+            <param name="pageSize">Number of records per page.</param>
+            <returns>A paged list of attendance records.</returns>
+        </member>
+        <member name="M:MidtermTeno.Controllers.AttendanceController.GetById(System.Int32)">
+            <summary>
+            Gets one attendance record by ID.
+            </summary>
+            <param name="id">Attendance record primary key.</param>
+            <returns>The matching attendance record.</returns>
+        </member>
+        <member name="M:MidtermTeno.Controllers.AttendanceController.Create(MidtermTeno.AttendanceManagementSysttem.DTOs.AttendanceRecordDTO)">
+            <summary>
+            Creates a new attendance record.
+            </summary>
+            <param name="dto">Attendance payload from the request body.</param>
+            <returns>The created attendance record.</returns>
+        </member>
+        <member name="M:MidtermTeno.Controllers.AttendanceController.Update(System.Int32,MidtermTeno.AttendanceManagementSysttem.DTOs.AttendanceRecordDTO)">
+            <summary>
+            Updates an existing attendance record by ID.
+            </summary>
+            <param name="id">Attendance record primary key.</param>
+            <param name="dto">Updated attendance payload.</param>
+            <returns>No content when update succeeds.</returns>
+        </member>
+        <member name="M:MidtermTeno.Controllers.AttendanceController.Delete(System.Int32)">
+            <summary>
+            Deletes an attendance record by ID.
+            </summary>
+            <param name="id">Attendance record primary key.</param>
+            <returns>No content when delete succeeds.</returns>
+        </member>
+        <member name="M:MidtermTeno.Controllers.AttendanceController.Mark(MidtermTeno.AttendanceManagementSysttem.DTOs.MarkAttendanceDTO)">
+            <summary>
+            Marks attendance for one student and course on a specific date.
+            If a record exists for the same student, course, and date, it is updated.
+            Otherwise, a new record is created.
+            </summary>
+            <param name="dto">Attendance marking payload.</param>
+            <returns>The created or updated attendance record.</returns>
+        </member>
+        <member name="T:MidtermTeno.Controllers.CourseController">
+            <summary>
+            Handles course-related endpoints.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.Controllers.CourseController.GetAllCourses(System.Int32,System.Int32)">
+            <summary>
+            Gets courses using pagination.
+            </summary>
+            <param name="pageNumber">Page index starting at 1.</param>
+            <param name="pageSize">Number of records per page.</param>
+            <returns>A paged list of courses.</returns>
+        </member>
+        <member name="M:MidtermTeno.Controllers.CourseController.GetCourseById(System.Int32)">
+            <summary>
+            Gets one course by ID.
+            </summary>
+            <param name="id">Course primary key.</param>
+            <returns>The matching course record.</returns>
+        </member>
+        <member name="M:MidtermTeno.Controllers.CourseController.CreateCourse(MidtermTeno.AttendanceManagementSysttem.DTOs.CourseDTO)">
+            <summary>
+            Creates a new course.
+            </summary>
+            <param name="dto">Course payload from the request body.</param>
+            <returns>The created course record.</returns>
+        </member>
+        <member name="M:MidtermTeno.Controllers.CourseController.UpdateCourse(System.Int32,MidtermTeno.AttendanceManagementSysttem.DTOs.CourseDTO)">
+            <summary>
+            Updates an existing course by ID.
+            </summary>
+            <param name="id">Course primary key.</param>
+            <param name="dto">Updated course payload.</param>
+            <returns>No content when update succeeds.</returns>
+        </member>
+        <member name="M:MidtermTeno.Controllers.CourseController.DeleteCourse(System.Int32)">
+            <summary>
+            Deletes a course by ID.
+            </summary>
+            <param name="id">Course primary key.</param>
+            <returns>No content when delete succeeds.</returns>
+        </member>
+        <member name="T:MidtermTeno.Controllers.StudentController">
+            <summary>
+            Handles student-related endpoints.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.Controllers.StudentController.GetAllStudents(System.Int32,System.Int32)">
+            <summary>
+            Gets students using pagination.
+            </summary>
+            <param name="pageNumber">Page index starting at 1.</param>
+            <param name="pageSize">Number of records per page.</param>
+            <returns>A paged list of students.</returns>
+        </member>
+        <member name="M:MidtermTeno.Controllers.StudentController.GetStudentById(System.Int32)">
+            <summary>
+            Gets one student by ID.
+            </summary>
+            <param name="id">Student primary key.</param>
+            <returns>The matching student record.</returns>
+        </member>
+        <member name="M:MidtermTeno.Controllers.StudentController.CreateStudent(MidtermTeno.AttendanceManagementSysttem.DTOs.StudentDTO)">
+            <summary>
+            Creates a new student.
+            </summary>
+            <param name="dto">Student payload from the request body.</param>
+            <returns>The created student record.</returns>
+        </member>
+        <member name="M:MidtermTeno.Controllers.StudentController.UpdateStudent(System.Int32,MidtermTeno.AttendanceManagementSysttem.DTOs.StudentDTO)">
+            <summary>
+            Updates an existing student by ID.
+            </summary>
+            <param name="id">Student primary key.</param>
+            <param name="dto">Updated student payload.</param>
+            <returns>No content when update succeeds.</returns>
+        </member>
+        <member name="M:MidtermTeno.Controllers.StudentController.DeleteStudent(System.Int32)">
+            <summary>
+            Deletes a student by ID.
+            </summary>
+            <param name="id">Student primary key.</param>
+            <returns>No content when delete succeeds.</returns>
+        </member>
+        <member name="T:MidtermTeno.Controllers.TeacherController">
+            <summary>
+            Handles teacher-related endpoints.
+            </summary>
+        </member>
+        <member name="M:MidtermTeno.Controllers.TeacherController.GetAllTeachers(System.Int32,System.Int32)">
+            <summary>
+            Gets teachers using pagination.
+            </summary>
+            <param name="pageNumber">Page index starting at 1.</param>
+            <param name="pageSize">Number of records per page.</param>
+            <returns>A paged list of teachers.</returns>
+        </member>
+        <member name="M:MidtermTeno.Controllers.TeacherController.GetTeacherById(System.Int32)">
+            <summary>
+            Gets one teacher by ID.
+            </summary>
+            <param name="id">Teacher primary key.</param>
+            <returns>The matching teacher record.</returns>
+        </member>
+        <member name="M:MidtermTeno.Controllers.TeacherController.CreateTeacher(MidtermTeno.AttendanceManagementSysttem.DTOs.TeacherDTO)">
+            <summary>
+            Creates a new teacher.
+            </summary>
+            <param name="dto">Teacher payload from the request body.</param>
+            <returns>The created teacher record.</returns>
+        </member>
+        <member name="M:MidtermTeno.Controllers.TeacherController.UpdateTeacher(System.Int32,MidtermTeno.AttendanceManagementSysttem.DTOs.TeacherDTO)">
+            <summary>
+            Updates an existing teacher by ID.
+            </summary>
+            <param name="id">Teacher primary key.</param>
+            <param name="dto">Updated teacher payload.</param>
+            <returns>No content when update succeeds.</returns>
+        </member>
+        <member name="M:MidtermTeno.Controllers.TeacherController.DeleteTeacher(System.Int32)">
+            <summary>
+            Deletes a teacher by ID.
+            </summary>
+            <param name="id">Teacher primary key.</param>
+            <returns>No content when delete succeeds.</returns>
+        </member>
+        <member name="T:MidtermTeno.Migrations.InitialMigration">
+            <inheritdoc />
+        </member>
+        <member name="M:MidtermTeno.Migrations.InitialMigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MidtermTeno.Migrations.InitialMigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MidtermTeno.Migrations.InitialMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

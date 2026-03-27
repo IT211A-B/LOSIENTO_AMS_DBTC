@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - AMS</title>
+    <link rel="stylesheet" href="~/css/styles.css" />
+</head>
+<body class="register-body">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Don_Bosco_Technical_College_%28Cebu%29_seal.png/240px-Don_Bosco_Technical_College_%28Cebu%29_seal.png"
+         class="register-logo" alt="Logo" />
+
+    <div class="register-card">
+        <h2>Register</h2>
+        <hr style="margin-bottom:20px; border-color:#90c0d0;" />
+
+        <div class="form-group">
+            <label>Name</label>
+            <div class="form-row">
+                <input type="text" id="firstName" placeholder="First Name" />
+                <input type="text" id="lastName" placeholder="Last Name" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Birthday</label>
+            <div class="birthday-row">
+                <select id="month">
+                    <option value="">Month</option>
+                    <option>January</option>
+                    <option>February</option>
+                    <option>March</option>
+                    <option>April</option>
+                    <option>May</option>
+                    <option>June</option>
+                    <option>July</option>
+                    <option>August</option>
+                    <option>September</option>
+                    <option>October</option>
+                    <option>November</option>
+                    <option>December</option>
+                </select>
+                <select id="day">
+                    <option value="">Day</option>
+                </select>
+                <select id="year">
+                    <option value="">Year</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Gender</label>
+            <select id="gender">
+                <option value="">Select your Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Prefer not to say</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Mobile number or email</label>
+            <input type="text" id="contact" placeholder="Mobile number or email" />
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Enter Unique Password" />
+        </div>
+
+        <button class="btn-submit" onclick="doRegister()">Submit</button>
+        <p class="register-footer">Already have an Account? <a href="/LogIn/Login">sign in</a></p>
+    </div>
+
+    <script>
+        // Populate day and year dropdowns
+        const daySelect = document.getElementById('day');
+        for (let i = 1; i <= 31; i++) {
+            const opt = document.createElement('option');
+            opt.textContent = i;
+            daySelect.appendChild(opt);
+        }
+        const yearSelect = document.getElementById('year');
+        for (let y = 2010; y >= 1950; y--) {
+            const opt = document.createElement('option');
+            opt.textContent = y;
+            yearSelect.appendChild(opt);
+        }
+
+        function doRegister() {
+            const fields = ['firstName', 'lastName', 'month', 'day', 'year', 'gender', 'contact', 'password'];
+            for (const f of fields) {
+                if (!document.getElementById(f).value.trim()) {
+                    alert('Please fill in all fields.');
+                    return;
+                }
+            }
+            alert('Registration successful!');
+            window.location.href = '/LogIn/Login';
+        }
+    </script>
+</body>
+</html>
