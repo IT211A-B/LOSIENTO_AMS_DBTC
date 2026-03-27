@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Courses - AMS</title>
+    <link rel="stylesheet" href="~/css/styles.css" />
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar" id="sidebar"></aside>
+        <div class="main-content">
+            <div class="topbar" id="topbar"></div>
+            <div class="page-content">
+
+                <div class="table-header">
+                    <div>
+                        <h2>Courses</h2>
+                        <div class="subtitle" id="cou-sub">Bachelor of Science in Information Technology</div>
+                    </div>
+                    <button class="btn-add" onclick="openModal()">ADD</button>
+                </div>
+
+                <div class="tab-row">
+                    <button class="tab-btn active" id="tab-bsit" onclick="switchTab('BSIT')">BSIT</button>
+                    <button class="tab-btn" id="tab-bsme" onclick="switchTab('BSME')">BSME</button>
+                </div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr><th>TEACHERS</th><th>Course Code</th><th>Subject</th><th>PROGRAM</th><th>UNITS</th><th></th></tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+                <div class="pagination">
+                    <button onclick="prevPage()">&#60;</button>
+                    <span id="pageInfo">Page 1</span>
+                    <button onclick="nextPage()">&#62;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD MODAL -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal">
+            <button class="close-modal" onclick="closeModal()">&#10005;</button>
+            <h3>Add Course</h3>
+            <div class="form-group"><label>Teacher Name</label><input type="text" id="m-teacher" placeholder="Teacher Name" /></div>
+            <div class="form-group"><label>Course Code</label><input type="text" id="m-code" placeholder="e.g. IT 210A" /></div>
+            <div class="form-group"><label>Subject</label><input type="text" id="m-subject" placeholder="Subject Name" /></div>
+            <div class="form-group">
+                <label>Program</label>
+                <select id="m-program"><option value="BSIT">BSIT</option><option value="BSME">BSME</option></select>
+            </div>
+            <div class="form-group"><label>Units</label><input type="number" id="m-units" placeholder="Units" min="1" max="6" /></div>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+                <button class="btn-save" onclick="addCourse()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- EDIT MODAL -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <button class="close-modal" onclick="closeEditModal()">&#10005;</button>
+            <h3>Edit Course</h3>
+            <div class="form-group"><label>Teacher Name</label><input type="text" id="e-teacher" placeholder="Teacher Name" /></div>
+            <div class="form-group"><label>Course Code</label><input type="text" id="e-code" placeholder="e.g. IT 210A" /></div>
+            <div class="form-group"><label>Subject</label><input type="text" id="e-subject" placeholder="Subject Name" /></div>
+            <div class="form-group">
+                <label>Program</label>
+                <select id="e-program"><option value="BSIT">BSIT</option><option value="BSME">BSME</option></select>
+            </div>
+            <div class="form-group"><label>Units</label><input type="number" id="e-units" placeholder="Units" min="1" max="6" /></div>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeEditModal()">Cancel</button>
+                <button class="btn-save" onclick="saveEdit()">Update</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/layout.js"></script>
+    <script>
+        renderLayout('Courses');
+
+        var courseNames = {
+            BSIT: 'Bachelor of Science in Information Technology',
+            BSME: 'Bachelor of Science in Mechanical Engineering'
+        };
+        var currentTab = 'BSIT';
+        var currentPage = 1;
+        var rowsPerPage = 10;
+        var editIndex = -1;
+
+        function switchTab(tab) {
+            currentTab = tab; currentPage = 1;
+            document.getElementById('tab-bsit').classList.toggle('active', tab === 'BSIT');
+            document.getElementById('tab-bsme').classList.toggle('active', tab === 'BSME');
+            document.getElementById('cou-sub').textContent = courseNames[tab];
+            renderTable();
+        }
+
+        function renderTable() {
+            var data = window.AMS.courses[currentTab];
+            var start = (currentPage - 1) * rowsPerPage;
+            var slice = data.slice(start, start + rowsPerPage);
+            document.getElementById('tableBody').innerHTML = slice.map(function(c, i) {
+                var gi = start + i;
+                return '<tr><td>' + c.teacher + '</td><td>' + c.code + '</td><td>' + c.subject + '</td><td>' + c.program + '</td><td>' + c.units + '</td>' +
+                    '<td style="display:flex;gap:4px;align-items:center;">' +
+                    '<button class="edit-btn" onclick="openEditModal(' + gi + ')"><img src="/Assets/edit_icon.png" alt="edit" /></button>' +
+                    '<button class="delete-btn" onclick="deleteRow(' + gi + ')"><img src="/Assets/delete_icon.png" alt="delete" /></button>' +
+                    '</td></tr>';
+            }).join('');
+            var total = Math.max(1, Math.ceil(data.length / rowsPerPage));
+            document.getElementById('pageInfo').textContent = 'Page ' + currentPage + ' / ' + total;
+        }
+
+        function deleteRow(idx) {
+            if (confirm('Delete this course?')) { window.AMS.courses[currentTab].splice(idx, 1); renderTable(); }
+        }
+
+        function openEditModal(idx) {
+            editIndex = idx;
+            var c = window.AMS.courses[currentTab][idx];
+            document.getElementById('e-teacher').value = c.teacher;
+            document.getElementById('e-code').value = c.code;
+            document.getElementById('e-subject').value = c.subject;
+            document.getElementById('e-program').value = c.program;
+            document.getElementById('e-units').value = c.units;
+            document.getElementById('editModal').classList.add('open');
+        }
+        function closeEditModal() { document.getElementById('editModal').classList.remove('open'); }
+        function saveEdit() {
+            var teacher = document.getElementById('e-teacher').value.trim();
+            var code = document.getElementById('e-code').value.trim();
+            var subject = document.getElementById('e-subject').value.trim();
+            var program = document.getElementById('e-program').value;
+            var units = parseInt(document.getElementById('e-units').value) || 0;
+            if (!teacher || !code || !subject || !units) { alert('Please fill all fields.'); return; }
+            window.AMS.courses[currentTab][editIndex] = { teacher: teacher, code: code, subject: subject, program: program, units: units };
+            renderTable(); closeEditModal();
+        }
+
+        function prevPage() { if (currentPage > 1) { currentPage--; renderTable(); } }
+        function nextPage() { var t = Math.ceil(window.AMS.courses[currentTab].length / rowsPerPage); if (currentPage < t) { currentPage++; renderTable(); } }
+        function openModal() { document.getElementById('modal').classList.add('open'); }
+        function closeModal() { document.getElementById('modal').classList.remove('open'); }
+        function addCourse() {
+            var teacher = document.getElementById('m-teacher').value.trim();
+            var code = document.getElementById('m-code').value.trim();
+            var subject = document.getElementById('m-subject').value.trim();
+            var program = document.getElementById('m-program').value;
+            var units = parseInt(document.getElementById('m-units').value) || 0;
+            if (!teacher || !code || !subject || !units) { alert('Please fill all fields.'); return; }
+            window.AMS.courses[program].push({ teacher: teacher, code: code, subject: subject, program: program, units: units });
+            if (currentTab !== program) switchTab(program); else renderTable();
+            closeModal();
+            ['m-teacher','m-code','m-subject','m-units'].forEach(function(f) { document.getElementById(f).value = ''; });
+        }
+
+        renderTable();
+    </script>
+</body>
+</html>
