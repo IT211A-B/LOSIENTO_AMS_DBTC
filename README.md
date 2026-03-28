@@ -1,49 +1,49 @@
 # LOSIENTO_AMS_DBTC
 
 **Team Member & Roles**
-Frontend - Keith Francis Lopez
-Backend - Vincent Rebese
-Project Manager -John Kevin Villacorte
+**Frontend** - _Keith Francis Lopez_
+**Backend** - _Vincent Rebese_
+**Project Manager** - _John Kevin Villacorte_
 
 
 **Project Overview**
-The Attendance Management System (AMS) is a web-based application designed to manage and monitor attendance efficiently. It allows users to record, track.
+_The Attendance Management System (AMS) is a web-based application designed to manage and monitor attendance efficiently. It allows users to record, track._
 
 
 **Objectives**
-Allow teachers to manually record attendance
-Manage student enrollment efficiently
-Maintain organized student records
-Handle course creation and management
+A_llow teachers to manually record attendance_
+_Manage student enrollment efficiently_
+_Maintain organized student records_
+_Handle course creation and management_
 
 
 **System Architecture**
-Frontend
-Handles user interface and experience
-Displays attendance data
-Communicates with backend APIs
+**Frontend**
+_Handles user interface and experience_
+_Displays attendance data_
+_Communicates with backend APIs_
 
-Backend
-Manages server logic and APIs
-Handles database operations
-Processes attendance records
+**Backend**
+_Manages server logic and APIs_
+_Handles database operations_
+_Processes attendance records_
 
-Project Manager
-Oversees project development
-Coordinates frontend and backend integration
-Ensures system meets requirements and deadlines
+**Project Manager**
+_Oversees project development_
+_Coordinates frontend and backend integration_
+_Ensures system meets requirements and deadlines_
 
 
 **Features**
-User authentication (login system)
-Attendance recording
-Data management (students/teachers)
-Dashboard overview
+_User authentication (login system)_
+_Attendance recording_
+_Data management (students/teachers)_
+_Dashboard overview_
 
 
 **Technologies Used**
-Frontend - HTML, CSS, JavaScript
-Backend - C# ( ASP.NET / .NET Framework  )
-Database - PostgreSQL
+**Frontend** - _HTML, CSS, JavaScript_
+**Backend** - _C# ( ASP.NET / .NET Framework )_
+**Database** - _PostgreSQL_
 
 
