@@ -11,34 +11,34 @@ _The Attendance Management System (AMS) is a web-based application designed to m
 
 
 **Objectives**
-_Allow teachers to manually record attendance_
-_Manage student enrollment efficiently_
-_Maintain organized student records_
-_Handle course creation and management_
+| _Allow teachers to manually record attendance_
+| _Manage student enrollment efficiently_
+| _Maintain organized student records_
+| _Handle course creation and management_
 
 
 **System Architecture**
 **Frontend**
-_Handles user interface and experience_
-_Displays attendance data_
-_Communicates with backend APIs_
+| _Handles user interface and experience_
+| _Displays attendance data_
+| _Communicates with backend APIs_
 
 **Backend**
-_Manages server logic and APIs_
-_Handles database operations_
-_Processes attendance records_
+| _Manages server logic and APIs_
+| _Handles database operations_
+| _Processes attendance records_
 
 **Project Manager**
-_Oversees project development_
-_Coordinates frontend and backend integration_
-_Ensures system meets requirements and deadlines_
+| _Oversees project development_
+| _Coordinates frontend and backend integration_
+| _Ensures system meets requirements and deadlines_
 
 
 **Features**
-_User authentication (login system)_
-_Attendance recording_
-_Data management (students/teachers)_
-_Dashboard overview_
+| _User authentication (login system)_
+| _Attendance recording_
+| _Data management (students/teachers)_
+| _Dashboard overview_
 
 
 **Technologies Used**
