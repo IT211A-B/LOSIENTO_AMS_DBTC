@@ -1,9 +1,9 @@
 # LOSIENTO_AMS_DBTC
 
 **Team Member & Roles**
-**Frontend**  _Keith Francis Lopez_
-|**Backend**  _Vincent Rebese_
-|**Project Manager**  _John Kevin Villacorte_
+| **Frontend**  _Keith Francis Lopez_
+| **Backend**  _Vincent Rebese_
+| **Project Manager**  _John Kevin Villacorte_
 
 
 **Project Overview**
@@ -42,8 +42,8 @@ _Dashboard overview_
 
 
 **Technologies Used**
-**Frontend** | _HTML, CSS, JavaScript_
-**Backend** | _C# ( ASP.NET / .NET Framework )_
-**Database** | _PostgreSQL_
+| **Frontend**  _HTML, CSS, JavaScript_
+| **Backend**  _C# ( ASP.NET / .NET Framework )_
+| **Database**  _PostgreSQL_
 
 
