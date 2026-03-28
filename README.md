@@ -7,7 +7,7 @@
 
 
 **Project Overview**
-~> _The Attendance Management System (AMS) is a web-based application designed to manage and monitor attendance efficiently. It allows users to record, track._
+~>| _The Attendance Management System (AMS) is a web-based application designed to manage and monitor attendance efficiently. It allows users to record, track._
 
 
 **Objectives**
