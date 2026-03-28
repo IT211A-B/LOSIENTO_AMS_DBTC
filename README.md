@@ -1,9 +1,9 @@
 # LOSIENTO_AMS_DBTC
 
 **Team Member & Roles**
-**Frontend** | _Keith Francis Lopez_
-**Backend** | _Vincent Rebese_
-**Project Manager** | _John Kevin Villacorte_
+**Frontend**  _Keith Francis Lopez_
+|**Backend**  _Vincent Rebese_
+|**Project Manager**  _John Kevin Villacorte_
 
 
 **Project Overview**
