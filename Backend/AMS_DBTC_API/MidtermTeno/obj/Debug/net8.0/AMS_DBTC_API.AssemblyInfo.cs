@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AMS_DBTC_API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ffdce169825aeb93feac720e100c3b4a53cd3eff")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+15e3c7ab0458e11e2869d959bf0bbcafb85c5d04")]
 [assembly: System.Reflection.AssemblyProductAttribute("AMS_DBTC_API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AMS_DBTC_API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

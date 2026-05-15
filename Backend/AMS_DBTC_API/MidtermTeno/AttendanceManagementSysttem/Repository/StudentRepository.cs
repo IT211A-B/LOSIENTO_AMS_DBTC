@@ -22,7 +22,7 @@ namespace MidtermTeno.AttendanceManagementSysttem.Repository
         /// </summary>
         public async Task<List<Student>> GetAllAsync()
         {
-            return await _db.Students.AsNoTracking().ToListAsync();
+            return await _db.Students.AsNoTracking().Include(s => s.Program).ToListAsync();
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace MidtermTeno.AttendanceManagementSysttem.Repository
         /// </summary>
         public async Task<Student?> GetByIdAsync(int studentId)
         {
-            return await _db.Students.FindAsync(studentId);
+            return await _db.Students.Include(s => s.Program).FirstOrDefaultAsync(s => s.StudentId == studentId);
         }
 
         /// <summary>

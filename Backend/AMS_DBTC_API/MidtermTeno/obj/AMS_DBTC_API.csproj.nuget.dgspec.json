@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ninja Turtle\\Desktop\\MidtermProject\\fake\\LOSIENTO_AMS_DBTC\\AMS_DBTC_API\\MidtermTeno\\AMS_DBTC_API.csproj": {}
+    "C:\\Users\\kevin\\OneDrive\\Desktop\\BACKEND_REBESE\\LOSIENTO_AMS_DBTC\\Backend\\AMS_DBTC_API\\MidtermTeno\\AMS_DBTC_API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ninja Turtle\\Desktop\\MidtermProject\\fake\\LOSIENTO_AMS_DBTC\\AMS_DBTC_API\\MidtermTeno\\AMS_DBTC_API.csproj": {
+    "C:\\Users\\kevin\\OneDrive\\Desktop\\BACKEND_REBESE\\LOSIENTO_AMS_DBTC\\Backend\\AMS_DBTC_API\\MidtermTeno\\AMS_DBTC_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ninja Turtle\\Desktop\\MidtermProject\\fake\\LOSIENTO_AMS_DBTC\\AMS_DBTC_API\\MidtermTeno\\AMS_DBTC_API.csproj",
+        "projectUniqueName": "C:\\Users\\kevin\\OneDrive\\Desktop\\BACKEND_REBESE\\LOSIENTO_AMS_DBTC\\Backend\\AMS_DBTC_API\\MidtermTeno\\AMS_DBTC_API.csproj",
         "projectName": "AMS_DBTC_API",
-        "projectPath": "C:\\Users\\Ninja Turtle\\Desktop\\MidtermProject\\fake\\LOSIENTO_AMS_DBTC\\AMS_DBTC_API\\MidtermTeno\\AMS_DBTC_API.csproj",
-        "packagesPath": "C:\\Users\\Ninja Turtle\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ninja Turtle\\Desktop\\MidtermProject\\fake\\LOSIENTO_AMS_DBTC\\AMS_DBTC_API\\MidtermTeno\\obj\\",
+        "projectPath": "C:\\Users\\kevin\\OneDrive\\Desktop\\BACKEND_REBESE\\LOSIENTO_AMS_DBTC\\Backend\\AMS_DBTC_API\\MidtermTeno\\AMS_DBTC_API.csproj",
+        "packagesPath": "C:\\Users\\kevin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kevin\\OneDrive\\Desktop\\BACKEND_REBESE\\LOSIENTO_AMS_DBTC\\Backend\\AMS_DBTC_API\\MidtermTeno\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Ninja Turtle\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kevin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -45,12 +45,24 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AspNetCore.HealthChecks.NpgSql": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.25, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.25, )"
@@ -113,7 +125,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

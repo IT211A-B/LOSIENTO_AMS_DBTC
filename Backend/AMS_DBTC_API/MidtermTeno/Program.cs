@@ -1,45 +1,32 @@
-using Microsoft.EntityFrameworkCore;
-using MidtermTeno.AttendanceManagementSysttem;
-using MidtermTeno.AttendanceManagementSysttem.Interface;
-using MidtermTeno.AttendanceManagementSysttem.Repository;
+using MidtermTeno.AttendanceManagementSysttem.Data;
+using MidtermTeno.AttendanceManagementSysttem.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddDbContext<DatabaseLibrary>(options =>
-  options.UseNpgsql(builder.Configuration.GetConnectionString("AttendanceDBString")));
-
-builder.Services.AddSwaggerGen(options =>
-{
-    var xmlFilename = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
-});
-
-builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
-builder.Services.AddScoped<IStudentRepository, StudentRepository>();
-builder.Services.AddScoped<ICourseRepository, CourseRepository>();
-builder.Services.AddScoped<IAttendanceRepository, AttendanceRecordRepository>();
-
+builder.Services.AddApplicationServices(builder.Configuration);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+var logger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("Startup");
+await DatabaseBootstrap.InitializeAsync(app, app.Configuration, logger);
+
+app.UseExceptionHandler();
+
+if (app.Environment.IsDevelopment() || app.Configuration.GetValue<bool>("EnableSwaggerInProduction"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+    app.UseHttpsRedirection();
 
+app.UseRateLimiter();
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllers().RequireRateLimiting("api");
+app.MapHealthChecks("/health");
 
 app.Run();
+
+public partial class Program;

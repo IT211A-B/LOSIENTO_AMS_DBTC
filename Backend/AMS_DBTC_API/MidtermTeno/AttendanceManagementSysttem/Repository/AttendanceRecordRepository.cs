@@ -1,6 +1,6 @@
+using AMS_DBTC_API.AttendanceManagementSysttem.Interface;
 using Microsoft.EntityFrameworkCore;
 using MidtermTeno.AttendanceManagementSysttem;
-using MidtermTeno.AttendanceManagementSysttem.Interface;
 using MidtermTeno.AttendanceManagementSysttem.Model;
 
 namespace MidtermTeno.AttendanceManagementSysttem.Repository
@@ -20,10 +20,17 @@ namespace MidtermTeno.AttendanceManagementSysttem.Repository
         /// <summary>
         /// Returns all attendance records ordered by latest date first.
         /// </summary>
-        public async Task<List<AttendanceRecord>> GetAllAsync()
+        public async Task<List<AttendanceRecord>> GetAllAsync(int? studentId = null, int? teacherId = null)
         {
-            return await _db.AttendanceRecords
-                .AsNoTracking()
+            var query = _db.AttendanceRecords.AsNoTracking().AsQueryable();
+
+            if (studentId.HasValue)
+                query = query.Where(r => r.StudentId == studentId.Value);
+
+            if (teacherId.HasValue)
+                query = query.Where(r => r.Course.TeacherId == teacherId.Value);
+
+            return await query
                 .OrderByDescending(r => r.AttendanceDate)
                 .ToListAsync();
         }

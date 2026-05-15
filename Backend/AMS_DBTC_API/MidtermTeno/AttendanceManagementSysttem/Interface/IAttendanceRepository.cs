@@ -1,10 +1,10 @@
 using MidtermTeno.AttendanceManagementSysttem.Model;
 
-namespace MidtermTeno.AttendanceManagementSysttem.Interface
+namespace AMS_DBTC_API.AttendanceManagementSysttem.Interface
 {
     public interface IAttendanceRepository
     {
-        Task<List<AttendanceRecord>> GetAllAsync();
+        Task<List<AttendanceRecord>> GetAllAsync(int? studentId = null, int? teacherId = null);
         Task<AttendanceRecord?> GetByIdAsync(int attendanceRecordId);
 
         // Returns the record for one student + one course on one date.

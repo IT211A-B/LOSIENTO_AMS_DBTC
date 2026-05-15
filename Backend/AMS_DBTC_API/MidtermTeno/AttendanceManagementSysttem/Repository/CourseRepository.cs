@@ -33,6 +33,9 @@ namespace MidtermTeno.AttendanceManagementSysttem.Repository
             return await _db.Courses.FindAsync(courseId);
         }
 
+        public async Task<bool> IsOwnedByTeacherAsync(int courseId, int teacherId) =>
+            await _db.Courses.AnyAsync(c => c.CourseId == courseId && c.TeacherId == teacherId);
+
         /// <summary>
         /// Creates a new course row.
         /// </summary>
