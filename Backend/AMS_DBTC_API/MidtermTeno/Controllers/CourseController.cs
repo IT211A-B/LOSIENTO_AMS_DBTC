@@ -1,7 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MidtermTeno.AttendanceManagementSysttem.Constants;
 using MidtermTeno.AttendanceManagementSysttem.DTOs;
-using MidtermTeno.AttendanceManagementSysttem.Interface;
-using MidtermTeno.AttendanceManagementSysttem.Model;
+using MidtermTeno.AttendanceManagementSysttem.Interface.ServiceInterface;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace MidtermTeno.Controllers
@@ -11,13 +12,14 @@ namespace MidtermTeno.Controllers
     /// </summary>
     [ApiController]
     [Route("api/courses")]
+    [Authorize]
     public class CourseController : ControllerBase
     {
-        private readonly ICourseRepository _courseRepo;
+        private readonly ICourseService _courseService;
 
-        public CourseController(ICourseRepository courseRepo)
+        public CourseController(ICourseService courseService)
         {
-            _courseRepo = courseRepo;
+            _courseService = courseService;
         }
 
         /// <summary>
@@ -32,24 +34,9 @@ namespace MidtermTeno.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<PagedResultDTO<CourseDTO>>> GetAllCourses([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            if (pageNumber <= 0 || pageSize <= 0) return BadRequest("pageNumber and pageSize must be greater than 0.");
-
-            var courses = await _courseRepo.GetAllAsync();
-            var totalCount = courses.Count;
-            var items = courses
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .Select(ToDto)
-                .ToList();
-
-            return Ok(new PagedResultDTO<CourseDTO>
-            {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                TotalCount = totalCount,
-                TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize),
-                Items = items
-            });
+            var result = await _courseService.GetAllAsync(pageNumber, pageSize);
+            if (result.ErrorMessage is not null) return BadRequest(result.ErrorMessage);
+            return Ok(result.Data);
         }
 
         /// <summary>
@@ -63,9 +50,9 @@ namespace MidtermTeno.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<CourseDTO>> GetCourseById(int id)
         {
-            var course = await _courseRepo.GetByIdAsync(id);
+            var course = await _courseService.GetByIdAsync(id);
             if (course is null) return NotFound();
-            return Ok(ToDto(course));
+            return Ok(course);
         }
 
         /// <summary>
@@ -74,36 +61,15 @@ namespace MidtermTeno.Controllers
         /// <param name="dto">Course payload from the request body.</param>
         /// <returns>The created course record.</returns>
         [HttpPost]
+        [Authorize(Roles = AppRoles.Admin)]
         [SwaggerOperation(Summary = "Create course", Description = "Creates a new course record.")]
         [ProducesResponseType(typeof(CourseDTO), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<CourseDTO>> CreateCourse(CourseDTO dto)
         {
-            if (string.IsNullOrWhiteSpace(dto.CourseName))
-                return BadRequest("CourseName is required.");
-            if (string.IsNullOrWhiteSpace(dto.CourseCode))
-                return BadRequest("CourseCode is required.");
-
-            var now = DateTime.UtcNow;
-            var model = new Course
-            {
-                CourseName = dto.CourseName.Trim(),
-                CourseCode = dto.CourseCode.Trim(),
-                Description = dto.Description,
-                TeacherId = dto.TeacherId,
-                CreatedAt = now,
-                LastUpdatedAt = now,
-                CreatedBy = dto.CreatedBy,
-                LastUpdatedBy = dto.LastUpdatedBy
-            };
-
-            var created = await _courseRepo.AddAsync(model);
-
-            return CreatedAtAction(
-                nameof(GetCourseById),
-                new { id = created.CourseId },
-                ToDto(created)
-            );
+            var result = await _courseService.CreateAsync(dto);
+            if (result.ErrorMessage is not null) return BadRequest(result.ErrorMessage);
+            return CreatedAtAction(nameof(GetCourseById), new { id = result.Data!.CourseId }, result.Data);
         }
 
         /// <summary>
@@ -113,31 +79,17 @@ namespace MidtermTeno.Controllers
         /// <param name="dto">Updated course payload.</param>
         /// <returns>No content when update succeeds.</returns>
         [HttpPut("{id:int}")]
+        [Authorize(Roles = $"{AppRoles.Admin},{AppRoles.Teacher}")]
         [SwaggerOperation(Summary = "Update course", Description = "Updates an existing course record by ID.")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateCourse(int id, CourseDTO dto)
         {
-            if (string.IsNullOrWhiteSpace(dto.CourseName))
-                return BadRequest("CourseName is required.");
-            if (string.IsNullOrWhiteSpace(dto.CourseCode))
-                return BadRequest("CourseCode is required.");
-
-            var existing = await _courseRepo.GetByIdAsync(id);
-            if (existing is null) return NotFound();
-
-            existing.CourseName = dto.CourseName.Trim();
-            existing.CourseCode = dto.CourseCode.Trim();
-            existing.Description = dto.Description;
-            existing.TeacherId = dto.TeacherId;
-            existing.LastUpdatedAt = DateTime.UtcNow;
-
-            if (dto.CreatedBy is not null) existing.CreatedBy = dto.CreatedBy;
-            if (dto.LastUpdatedBy is not null) existing.LastUpdatedBy = dto.LastUpdatedBy;
-
-            var ok = await _courseRepo.UpdateAsync(existing);
-            return ok ? NoContent() : NotFound();
+            var result = await _courseService.UpdateAsync(id, dto);
+            if (result.ErrorMessage is not null) return BadRequest(result.ErrorMessage);
+            if (result.NotFound) return NotFound();
+            return NoContent();
         }
 
         /// <summary>
@@ -146,29 +98,14 @@ namespace MidtermTeno.Controllers
         /// <param name="id">Course primary key.</param>
         /// <returns>No content when delete succeeds.</returns>
         [HttpDelete("{id:int}")]
+        [Authorize(Roles = AppRoles.Admin)]
         [SwaggerOperation(Summary = "Delete course", Description = "Deletes a course by ID.")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteCourse(int id)
         {
-            var ok = await _courseRepo.DeleteAsync(id);
+            var ok = await _courseService.DeleteAsync(id);
             return ok ? NoContent() : NotFound();
-        }
-
-        private static CourseDTO ToDto(Course model)
-        {
-            return new CourseDTO
-            {
-                CourseId = model.CourseId,
-                CourseName = model.CourseName,
-                CourseCode = model.CourseCode,
-                Description = model.Description,
-                TeacherId = model.TeacherId,
-                CreatedAt = model.CreatedAt,
-                LastUpdatedAt = model.LastUpdatedAt,
-                CreatedBy = model.CreatedBy,
-                LastUpdatedBy = model.LastUpdatedBy
-            };
         }
     }
 }

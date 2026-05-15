@@ -25,22 +25,12 @@
             </summary>
             <typeparam name="T">The item type returned in the page.</typeparam>
         </member>
-        <member name="T:MidtermTeno.AttendanceManagementSysttem.DTOs.StudentDTO">
-            <summary>
-            Data transfer object for student API requests and responses.
-            </summary>
-        </member>
-        <member name="T:MidtermTeno.AttendanceManagementSysttem.DTOs.TeacherDTO">
-            <summary>
-            Data transfer object for teacher API requests and responses.
-            </summary>
-        </member>
         <member name="T:MidtermTeno.AttendanceManagementSysttem.Repository.AttendanceRecordRepository">
             <summary>
             EF Core data access implementation for attendance records.
             </summary>
         </member>
-        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.AttendanceRecordRepository.GetAllAsync">
+        <member name="M:MidtermTeno.AttendanceManagementSysttem.Repository.AttendanceRecordRepository.GetAllAsync(System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
             Returns all attendance records ordered by latest date first.
             </summary>
@@ -159,57 +149,6 @@
             <summary>
             Deletes one teacher row by ID.
             </summary>
-        </member>
-        <member name="T:MidtermTeno.Controllers.AttendanceController">
-            <summary>
-            Handles attendance-related endpoints.
-            </summary>
-        </member>
-        <member name="M:MidtermTeno.Controllers.AttendanceController.GetAll(System.Int32,System.Int32)">
-            <summary>
-            Gets attendance records using pagination.
-            </summary>
-            <param name="pageNumber">Page index starting at 1.</param>
-            <param name="pageSize">Number of records per page.</param>
-            <returns>A paged list of attendance records.</returns>
-        </member>
-        <member name="M:MidtermTeno.Controllers.AttendanceController.GetById(System.Int32)">
-            <summary>
-            Gets one attendance record by ID.
-            </summary>
-            <param name="id">Attendance record primary key.</param>
-            <returns>The matching attendance record.</returns>
-        </member>
-        <member name="M:MidtermTeno.Controllers.AttendanceController.Create(MidtermTeno.AttendanceManagementSysttem.DTOs.AttendanceRecordDTO)">
-            <summary>
-            Creates a new attendance record.
-            </summary>
-            <param name="dto">Attendance payload from the request body.</param>
-            <returns>The created attendance record.</returns>
-        </member>
-        <member name="M:MidtermTeno.Controllers.AttendanceController.Update(System.Int32,MidtermTeno.AttendanceManagementSysttem.DTOs.AttendanceRecordDTO)">
-            <summary>
-            Updates an existing attendance record by ID.
-            </summary>
-            <param name="id">Attendance record primary key.</param>
-            <param name="dto">Updated attendance payload.</param>
-            <returns>No content when update succeeds.</returns>
-        </member>
-        <member name="M:MidtermTeno.Controllers.AttendanceController.Delete(System.Int32)">
-            <summary>
-            Deletes an attendance record by ID.
-            </summary>
-            <param name="id">Attendance record primary key.</param>
-            <returns>No content when delete succeeds.</returns>
-        </member>
-        <member name="M:MidtermTeno.Controllers.AttendanceController.Mark(MidtermTeno.AttendanceManagementSysttem.DTOs.MarkAttendanceDTO)">
-            <summary>
-            Marks attendance for one student and course on a specific date.
-            If a record exists for the same student, course, and date, it is updated.
-            Otherwise, a new record is created.
-            </summary>
-            <param name="dto">Attendance marking payload.</param>
-            <returns>The created or updated attendance record.</returns>
         </member>
         <member name="T:MidtermTeno.Controllers.CourseController">
             <summary>
@@ -347,6 +286,18 @@
             <inheritdoc />
         </member>
         <member name="M:MidtermTeno.Migrations.InitialMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:MidtermTeno.Migrations.ExpandSchemaWithAuthAndRelations">
+            <inheritdoc />
+        </member>
+        <member name="M:MidtermTeno.Migrations.ExpandSchemaWithAuthAndRelations.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MidtermTeno.Migrations.ExpandSchemaWithAuthAndRelations.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MidtermTeno.Migrations.ExpandSchemaWithAuthAndRelations.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
     </members>

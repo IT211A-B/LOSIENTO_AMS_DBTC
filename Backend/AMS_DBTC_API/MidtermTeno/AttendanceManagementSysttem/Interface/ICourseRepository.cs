@@ -6,6 +6,7 @@ namespace MidtermTeno.AttendanceManagementSysttem.Interface
     {
         Task<List<Course>> GetAllAsync();
         Task<Course?> GetByIdAsync(int courseId);
+        Task<bool> IsOwnedByTeacherAsync(int courseId, int teacherId);
         Task<Course> AddAsync(Course course);
         Task<bool> UpdateAsync(Course course);
         Task<bool> DeleteAsync(int courseId);

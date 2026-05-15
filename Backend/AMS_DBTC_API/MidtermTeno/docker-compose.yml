@@ -1,0 +1,42 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: ams_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: AttendanceSystemDB
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ams_api
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__AttendanceDBString: "Host=db;Port=5432;Database=AttendanceSystemDB;Username=postgres;Password=postgres"
+      Jwt__SecretKey: "ProductionChangeMe_UseStrongSecretKey_AtLeast32Chars!"
+      Jwt__Issuer: "AMS_DBTC_API"
+      Jwt__Audience: "AMS_DBTC_Client"
+      Jwt__ExpirationMinutes: "60"
+      Seed__AdminUsername: "admin"
+      Seed__AdminPassword: "Admin@12345"
+      EnableSwaggerInProduction: "true"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
